@@ -1,15 +1,26 @@
-const ContaCorrente = require("./conta-corrente");
-const ContaPoupanca = require("./conta-poupanca");
+import { Conta } from './Conta.js';
+import { ContaCorrente } from './ContaCorrente.js';
+import { ContaPoupanca } from './ContaPoupanca.js';
 
 const contas = [
-  new ContaCorrente("Ana", 1000),
-  new ContaPoupanca("Bruno", 2000),
+  new ContaCorrente('0001', 'Ana Lima', 500),
+  new ContaPoupanca('0002', 'Bruno Souza'),
 ];
 
-for (const c of contas) {
-  c.depositar(100);
-  c.fecharMes(); // polimorfismo: cada tipo aplica a sua regra
-  console.log(
-    `${c.constructor.name} | ${c.titular} | saldo: ${c.saldo.toFixed(2)}`
-  );
+contas.forEach((c) => c.depositar(1000));
+
+function fecharMes(listaDeContas) {
+  for (const conta of listaDeContas) {
+    const tarifa = conta.tarifaMensal();
+    if (tarifa > 0) conta.sacar(tarifa);
+    console.log(`${conta} (tarifa: R$ ${tarifa.toFixed(2)})`);
+  }
+}
+
+fecharMes(contas);
+
+try {
+  new Conta('0003', 'Carla Dias');
+} catch (e) {
+  console.log('Erro esperado →', e.message);
 }
