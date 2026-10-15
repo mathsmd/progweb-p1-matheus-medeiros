@@ -1,2 +1,11 @@
 # Progweb P1 - Matheus Medeiros
-# Atividade da S1: domínio de conta bancária com os quatro pilares de POO.
+
+## Sobre
+
+Aplicação fullstack (API Express em camadas + SQLite + frontend Bootstrap com Vanilla JS).
+
+**Domínio:** agendamento de consultas de uma clínica médica. A modelagem está em [MODELAGEM.md](MODELAGEM.md).
+
+## Estrutura
+
+- `s1/` — exercícios da Semana 1: os quatro pilares da POO em JavaScript.
