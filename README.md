@@ -1,5 +1,4 @@
 # Progweb P1 - Matheus Medeiros
-
 ## Sobre
 
 Aplicação fullstack (API Express em camadas + SQLite + frontend Bootstrap com Vanilla JS).
