@@ -1,4 +1,5 @@
 import { pacienteModel } from '../models/pacienteModel.js';
+import { consultaModel } from '../models/consultaModel.js';
 import { erro } from '../utils/erro.js';
 
 export const pacienteService = {
@@ -27,6 +28,10 @@ export const pacienteService = {
   },
 
   remover(id) {
+    // Regra nova (S5): paciente com consultas não pode ser removido
+    if (consultaModel.listarPorPaciente(id).length > 0) {
+      throw erro(409, 'Paciente possui consultas. Remova as consultas primeiro.');
+    }
     const removido = pacienteModel.remover(id);
     if (!removido) throw erro(404, 'Paciente não encontrado');
   },
