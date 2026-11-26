@@ -7,10 +7,15 @@ import { errorHandler } from './middleware/errorHandler.js';
 
 const app = express();
 
+// Em produção, a origem do front vem da variável CORS_ORIGIN (várias, separadas
+// por vírgula). Sem ela, valem as do nosso front local.
+const origens = (process.env.CORS_ORIGIN
+  ?? 'http://localhost:5500,http://127.0.0.1:5500')
+  .split(',')
+  .map((o) => o.trim());
+
 // --- Middleware global (antes das rotas) ---
-app.use(cors({
-  origin: ['http://localhost:5500', 'http://127.0.0.1:5500'],
-}));
+app.use(cors({ origin: origens }));
 app.use(express.json());
 app.use(logger);
 
