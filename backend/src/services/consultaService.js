@@ -38,6 +38,11 @@ export const consultaService = {
     if (dados.status !== undefined && !STATUS.includes(dados.status)) {
       throw erro(400, `Status deve ser um de: ${STATUS.join(', ')}`);
     }
+    // Acréscimo meu: com a chave estrangeira ligada, um pacienteId que não existe
+    // estouraria no banco como erro 500. Aqui vira 422, igual ao criar.
+    if (dados.pacienteId !== undefined && !pacienteModel.buscarPorId(Number(dados.pacienteId))) {
+      throw erro(422, 'Paciente informado não existe');
+    }
     const atualizada = consultaModel.atualizar(id, dados);
     if (!atualizada) throw erro(404, 'Consulta não encontrada');
     return atualizada;

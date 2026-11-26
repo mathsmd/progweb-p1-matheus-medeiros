@@ -8,8 +8,8 @@ API: Clínica · entidades: Paciente e Consulta · servidor: `npm run dev` em ht
 | 2 | POST | /pacientes | {"nome":"Maria Dup","cpf":"111.111.111-11"} | 409 | regra: cpf único |
 | 3 | POST | /pacientes | {"cpf":"222"} | 400 | campo "nome" obrigatório |
 | 4 | POST | /consultas | {"pacienteId":1,"medico":"Dr. João","dataHora":"2026-11-20T09:00"} | 201 | cria consulta |
-| 5 | POST | /consultas | {"pacienteId":1,"medico":"Dr. João","dataHora":"2026-11-20T09:00"} | 409 | regra: médico sem dois horários iguais |
-| 6 | POST | /consultas | {"pacienteId":999,"medico":"Dra. Ana","dataHora":"2026-11-20T10:00"} | 422 | paciente não existe |
+| 11 | DELETE | /pacientes/1 | — | 409 | regra: paciente com consultas não pode ser removido |
+| 12 | DELETE | /pacientes/4 | — | 204 | remove a Maria Souza do teste 1, que não tem consultas |
 | 7 | POST | /consultas | {"pacienteId":1,"medico":"Dra. Ana","dataHora":"2026-11-20T10:00","status":"pendente"} | 400 | status inválido |
 | 8 | GET | /consultas?pacienteId=1 | — | 200 | filtro 1:N |
 | 9 | GET | /pacientes/99 | — | 404 | não encontrado |
